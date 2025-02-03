@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta Regresiva</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="countdown">
+            <h1>Falta poco para tu sorpresa 🎉</h1>
+            <p id="timer"></p>
+        </div>
+        <div id="message" class="hidden">
+            <h1>¡Feliz Cumpleaños! 🎂</h1>
+            <img src="imagen.jpg" alt="Feliz Cumpleaños">
+            <p>Te deseo un día lleno de amor y felicidad. ¡Te quiero mucho! 💖</p>
+        </div>
+    </div>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe4e1;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        #message.hidden {
+            display: none;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const countdownElement = document.getElementById("timer");
+            const messageElement = document.getElementById("message");
+            const countdownContainer = document.getElementById("countdown");
+
+            const targetDate = new Date("February 4, 2025 00:00:00").getTime();
+
+            const interval = setInterval(() => {
+                const now = new Date().getTime();
+                const timeLeft = targetDate - now;
+
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    countdownContainer.style.display = "none";
+                    messageElement.classList.remove("hidden");
+                } else {
+                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                    countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
